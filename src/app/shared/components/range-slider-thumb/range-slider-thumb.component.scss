@@ -1,0 +1,29 @@
+@import "~bootstrap/scss/bootstrap.scss";
+:host {
+  display: block;
+  border-radius: 50%;
+  background-color: $primary;
+  width: var(--thumb-size);
+  height: var(--thumb-size);
+  margin-top: -10px;
+  top: 50%;
+  left: 0px;
+  position: absolute;
+
+  &.pressed {
+    z-index: 2;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+  }
+}
+
+.disabled {
+  pointer-events: none;
+}
+
+::ng-deep .value {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}

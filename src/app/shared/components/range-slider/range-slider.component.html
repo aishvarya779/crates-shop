@@ -1,0 +1,21 @@
+<div class="track">
+  <crs-range-slider-thumb *ngIf="form.get('secondThumb').value != null" [formControl]="form.get('firstThumb')" [min]="0"
+    [max]="form.get('secondThumb').value">
+    <div class="value">
+      {{ transformPixelToValue(form.get("firstThumb").value) }}
+    </div>
+  </crs-range-slider-thumb>
+  <crs-range-slider-thumb *ngIf="
+      form.get('firstThumb').value != null &&
+      cachedBoundingClientRectWidth != null
+    " [formControl]="form.get('secondThumb')" [min]="form.get('firstThumb').value"
+    [max]="cachedBoundingClientRectWidth">
+    <div class="value">
+      {{ transformPixelToValue(form.get("secondThumb").value) }}
+    </div>
+  </crs-range-slider-thumb>
+
+  <div class="filled-line" [style.left.px]="form.get('firstThumb').value" [style.right.px]="
+      cachedBoundingClientRectWidth - form.get('secondThumb').value
+    "></div>
+</div>

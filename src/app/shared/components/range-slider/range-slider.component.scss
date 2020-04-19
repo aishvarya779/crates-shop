@@ -1,0 +1,33 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+:host {
+  --primary-color: #ac8e58;
+  --track-color: #c9c9c9;
+  --filled-line: black;
+  --thumb-size: 20px;
+  padding: 25px 0px;
+  display: block;
+  user-select: none;
+}
+
+.track {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background-color: var(--track-color);
+}
+
+crs-range-slider-thumb:first-of-type {
+  left: 245px;
+}
+
+crs-range-slider-thumb {
+  z-index: 1;
+}
+
+.filled-line {
+  background-color: $primary;
+  position: absolute;
+  height: 2px;
+  z-index: 0;
+}

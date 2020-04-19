@@ -1,0 +1,23 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+#sort {
+  input {
+
+    &[type="radio"] {
+      visibility: hidden;
+
+      &:checked+label {
+        color: $primary;
+        text-decoration: underline;
+        text-underline-position: under;
+      }
+
+      &:checked+label,
+      &:not(:checked)+label {
+        cursor: pointer;
+        font-weight: 500;
+      }
+    }
+
+  }
+}
