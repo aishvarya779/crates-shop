@@ -43,19 +43,10 @@ export class AppComponent implements AfterViewInit {
   constructor(private el: ElementRef, private resizeSvc: ResizeService) {}
 
   ngAfterViewInit(): void {
-    this.detectScreenSize();
+    this.resizeSvc.detectScreenSize();
   }
   @HostListener('window:resize', [])
   onResizer() {
-    this.detectScreenSize();
-  }
-
-  private detectScreenSize() {
-    let cwidth = window.innerWidth;
-    if (cwidth < 768) {
-      this.resizeSvc.onResize(true);
-    } else {
-      this.resizeSvc.onResize(false);
-    }
+    this.resizeSvc.detectScreenSize();
   }
 }
