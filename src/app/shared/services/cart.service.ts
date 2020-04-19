@@ -44,9 +44,13 @@ export class CartService {
     let item$ = this.cartItems$.getValue();
     let index = item$.findIndex(item => item.id === product.id);
     if (index > -1) {
-      item$[index].count--;
-      this.cartItems$.next(item$);
-      this.updateCount(1, 'DEC');
+      if (item$[index].count === 1) {
+        this.removeProduct(product);
+      } else {
+        item$[index].count--;
+        this.cartItems$.next(item$);
+        this.updateCount(1, 'DEC');
+      }
     }
   }
   removeProduct(product: PRODUCT) {

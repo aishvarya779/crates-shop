@@ -1,4 +1,4 @@
-<div class="row" id="cart">
+<div class="row" id="cart" *ngIf="(cartItems$|async).length > 0">
   <div class="col-md-8 col-sm-12">
     <div class="card mb-3 p-3 border-dark border-right-0" *ngFor="let item of cartItems$|async">
       <div class="row no-gutters">
@@ -39,19 +39,24 @@
       <div class="card-body">
         <div class="card-text d-flex">
           <p class="col">Price &#x28;1 Item&#x29;</p>
-          <p class="col d-flex justify-content-between"><span>:</span><span>&#8377;789</span></p>
+          <p class="col d-flex justify-content-between"><span>:</span><span>&#8377;{{totalPrice}}</span></p>
         </div>
         <div class="card-text d-flex">
           <p class="col">Discount</p>
-          <p class="col d-flex justify-content-between"><span>:</span><span>&#8377;789</span></p>
+          <p class="col d-flex justify-content-between"><span>:</span><span>&#8377;{{totalDiscount}}</span></p>
         </div>
       </div>
       <div class="card-footer d-flex justify-content-between font-weight-bolder">
         <span>
           Total Payable
         </span>
-        <span>&#8377; 479</span>
+        <span>&#8377; {{totalPrice - totalDiscount}}</span>
       </div>
     </div>
+  </div>
+</div>
+<div class="row" *ngIf="(cartItems$|async).length === 0">
+  <div class="col ">
+    <h4 class="text-center">You Have 0 items in cart. <a routerLink="/">Click here</a> to add items in cart</h4>
   </div>
 </div>
