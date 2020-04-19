@@ -1,28 +1,28 @@
 <div class="row" id="cart">
   <div class="col-md-8 col-sm-12">
-    <div class="card mb-3 p-3 border-dark border-right-0">
+    <div class="card mb-3 p-3 border-dark border-right-0" *ngFor="let item of cartItems$|async">
       <div class="row no-gutters">
         <div class="col-md-2">
-          <img src="assets/tata_salt.jpeg" class="card-img" alt="...">
+          <img [src]="item.img" class="card-img" alt="...">
         </div>
         <div class="col-md-10">
-          <div class="card-body shadow-sm">
+          <div class="card-body">
             <div class="row">
               <div class="col-md-4 m-auto">
-                <h5 class="card-title">Item 1</h5>
+                <h5 class="card-title">{{item.name}}</h5>
                 <p class="card-text">
-                  <span class="font-weight-bold">&#8377;319</span>
-                  <span class="mx-3 text-muted line-through">900</span>
-                  <span class="text-success">64% Off</span>
+                  <span class="font-weight-bold">&#8377;{{item.sellingPrice}}</span>
+                  <span class="mx-3 text-muted line-through"></span>
+                  <span class="text-success">{{item.discount}}% Off</span>
                 </p>
               </div>
               <div class="col-md-4 m-auto">
-                <button class="btn border"><i class="fa fa-minus"></i></button>
-                <button class="btn disabled border mx-3">1</button>
-                <button class="btn border"><i class="fa fa-plus"></i></button>
+                <button class="btn border" (click)="updateCount(item,'DEC')"><i class="fa fa-minus"></i></button>
+                <button class="btn disabled border mx-3">{{item.count}}</button>
+                <button class="btn border" (click)="updateCount(item,'INC')"><i class="fa fa-plus"></i></button>
               </div>
               <div class="col-md-4 m-auto">
-                <button class="btn default"> Remove</button>
+                <button class="btn default" (click)="removeProduct(item)"> Remove</button>
               </div>
             </div>
 

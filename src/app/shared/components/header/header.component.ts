@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from '../../services/cart.service';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'crs-header',
@@ -7,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   toggleNav: boolean;
-  constructor() {}
+  itemCount$: Observable<number>;
+  constructor(private cartSvc: CartService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.itemCount$ = this.cartSvc.getCartCount();
+  }
 }

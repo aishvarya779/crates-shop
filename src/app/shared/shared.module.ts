@@ -10,6 +10,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { RangeSliderComponent } from './components/range-slider/range-slider.component';
 import { RangeSliderThumbComponent } from './components/range-slider-thumb/range-slider-thumb.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     RangeSliderComponent,
     RangeSliderThumbComponent
   ],
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   entryComponents: [
     // DialogComponent
   ],

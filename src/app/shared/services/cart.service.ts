@@ -6,100 +6,62 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CartService {
-  private cartItems: CARTDETAILS = {
-    porduct: [],
-    count: 0,
-    totalPayable: 0,
-    netDiscount: 0
-  };
-  cartDetails$: BehaviorSubject<CARTDETAILS> = new BehaviorSubject(null);
+  private cartItems$: BehaviorSubject<PRODUCT[]> = new BehaviorSubject([]);
+  private itemCount$: BehaviorSubject<number> = new BehaviorSubject(0);
   constructor() {}
 
-  addProductToCart(product: PRODUCT) {
-    let discountAmount = product.sellingPrice * (1 - product.discount / 100);
-    if (this.cartItems && this.cartItems.porduct) {
-      let findProductIndex = this.cartItems.porduct.findIndex(
-        item => item.product.id === product.id
-      );
-      if (findProductIndex > -1) {
-        let temp = { ...this.cartItems.porduct[findProductIndex] };
-        temp.count++;
-        temp.totalDiscount += discountAmount;
-        temp.totalPrice += product.sellingPrice;
-        this.cartItems.porduct[findProductIndex] = temp;
-      } else {
-        let newPrdouct: ADDEDPRODUCT = {
-          product: product,
-          count: 1,
-          totalDiscount: discountAmount,
-          totalPrice: product.sellingPrice
-        };
-        this.cartItems.porduct = [...this.cartItems.porduct, newPrdouct];
-      }
-      this.cartItems.count++;
-      this.cartItems.totalPayable += product.sellingPrice;
-      this.cartItems.netDiscount += discountAmount;
-      this.cartDetails$.next(this.cartItems);
-    }
+  getCartItem() {
+    return this.cartItems$.asObservable();
   }
 
-  private getProductCount(product: PRODUCT) {
-    let count = new BehaviorSubject(0);
-    let index = this.cartItems.porduct.findIndex(
-      item => item.product.id === product.id
-    );
+  getCartCount() {
+    return this.itemCount$.asObservable();
+  }
+
+  updateCount(val: number, type) {
+    let count = this.itemCount$.getValue();
+    if (type === 'INC') {
+      count = count + val;
+    } else {
+      count = count - val;
+    }
+    this.itemCount$.next(count);
+  }
+  addToCart(product: PRODUCT) {
+    let item$ = this.cartItems$.getValue();
+    let index = item$.findIndex(item => item.id === product.id);
     if (index > -1) {
-      count.next(this.cartItems.porduct[index].count);
-      return count.asObservable();
+      item$[index].count++;
+    } else {
+      product.count++;
+      item$.push(product);
+    }
+    this.updateCount(1, 'INC');
+    this.cartItems$.next(item$);
+  }
+
+  removeOneItem(product: PRODUCT) {
+    let item$ = this.cartItems$.getValue();
+    let index = item$.findIndex(item => item.id === product.id);
+    if (index > -1) {
+      item$[index].count--;
+      this.cartItems$.next(item$);
+      this.updateCount(1, 'DEC');
     }
   }
-  decreaeProductCount(cartProduct: ADDEDPRODUCT) {
-    if (this.cartItems && this.cartItems.porduct) {
-      let findProduct = this.cartItems.porduct.findIndex(
-        item => item.product.id === cartProduct.product.id
-      );
-      if (findProduct > -1) {
-        let temp: ADDEDPRODUCT = {
-          ...this.cartItems.porduct[findProduct],
-          count: this.cartItems.porduct[findProduct].count--,
-          totalDiscount:
-            this.cartItems.porduct[findProduct].totalDiscount -
-            this.cartItems.porduct[findProduct].product.discount,
-          totalPrice:
-            this.cartItems.porduct[findProduct].totalPrice -
-            this.cartItems.porduct[findProduct].product.sellingPrice
-        };
-        this.cartItems.porduct[findProduct] = temp;
-        this.cartItems.count = this.cartItems.count--;
-        this.cartItems.netDiscount =
-          this.cartItems.netDiscount - temp.product.discount;
-        this.cartItems.totalPayable =
-          this.cartItems.totalPayable - temp.product.sellingPrice;
-        this.cartDetails$.next(this.cartItems);
-      }
-    }
-  }
-  removeProduct(cartProduct: ADDEDPRODUCT) {
-    if (this.cartItems && this.cartItems.porduct) {
-      let findProduct = this.cartItems.porduct.findIndex(
-        item => item.product.id === cartProduct.product.id
-      );
-      if (findProduct > -1) {
-        this.cartItems.count =
-          this.cartItems.count - this.cartItems.porduct[findProduct].count;
-        this.cartItems.netDiscount =
-          this.cartItems.netDiscount -
-          this.cartItems.porduct[findProduct].totalDiscount;
-        this.cartItems.totalPayable =
-          this.cartItems.totalPayable -
-          this.cartItems.porduct[findProduct].totalPrice;
-        this.cartItems.porduct.splice(findProduct, 1);
-        this.cartDetails$.next(this.cartItems);
-      }
+  removeProduct(product: PRODUCT) {
+    let item$ = this.cartItems$.getValue();
+    let index = item$.findIndex(item => item.id === product.id);
+    if (index > -1) {
+      let count = item$[index].count;
+      item$.splice(index, 1);
+      this.cartItems$.next(item$);
+      this.updateCount(count, 'DEC');
     }
   }
 
-  getCartDetails(): Observable<CARTDETAILS> {
-    return this.cartDetails$.asObservable();
+  clearCart() {
+    this.itemCount$.next(0);
+    this.cartItems$.next([]);
   }
 }

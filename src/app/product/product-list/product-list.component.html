@@ -22,10 +22,17 @@
         <div class="row mx-0">
           <div class="card mx-1 my-1 border col-5 offset-1 col-md-2 col-lg-2 col-xl-2 offset-md-1 offset-lg-1
             offset-xl-1" *ngFor="let item of list">
-            <img src="assets/tata_salt.jpeg" class="card-img-top" alt="...">
+            <img [src]="item.img" class="card-img-top" alt="...">
             <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                card's content.{{'item '+ item}}</p>
+
+              <p class="card-text">
+                <span class="font-weight-bold">&#8377;{{item.sellingPrice}}</span>
+                <span class="mx-3 text-muted line-through">{{900}}</span>
+                <span class="text-success">{{item.discount}}% Off</span>
+              </p>
+              <div>
+                <button class="btn btn-primary" (click)="addToCart(item)">Add To Cart</button>
+              </div>
             </div>
 
           </div>

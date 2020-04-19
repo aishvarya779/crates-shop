@@ -4,6 +4,7 @@ export interface PRODUCT {
   sellingPrice: number;
   discount: number;
   img: string;
+  count: number;
 }
 
 export interface ADDEDPRODUCT {
