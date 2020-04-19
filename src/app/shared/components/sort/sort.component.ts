@@ -20,7 +20,10 @@ export class SortComponent implements OnInit {
     // this.open();
   }
 
-  open() {
-    this.dialogSvc.open('sort');
+  showDialog(id) {
+    this.dialogSvc.showDialog(id);
+  }
+  close(id) {
+    this.dialogSvc.closeDialog(id);
   }
 }

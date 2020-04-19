@@ -1,7 +1,12 @@
-<div id="filter" class="d-flex flex-column justify-content-center">
+<div id="filter" class="d-flex flex-column justify-content-center" *ngIf="!(screenSize$ |async)">
   <span class="h5">Filters</span>
   <crs-range-slider [min]="100" [max]="500" [formControl]="rangeSlider"></crs-range-slider>
 
   <button class="btn btn-sm btn-primary m-auto">Apply</button>
 
 </div>
+<button (click)="showDialog('modal_2')" *ngIf="(screenSize$ |async)">Filter Options</button>
+<crs-dialog id="modal_2" class="hhidden">
+  Sort Dialog
+  <button (click)="close('modal_2')">Close Dialog</button>
+</crs-dialog>

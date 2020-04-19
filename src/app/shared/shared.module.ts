@@ -11,6 +11,7 @@ import { RangeSliderComponent } from './components/range-slider/range-slider.com
 import { RangeSliderThumbComponent } from './components/range-slider-thumb/range-slider-thumb.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { SortPipeDirective } from './pipes/sort-pipe.directive';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { RouterModule } from '@angular/router';
     SortComponent,
     DialogComponent,
     RangeSliderComponent,
-    RangeSliderThumbComponent
+    RangeSliderThumbComponent,
+    SortPipeDirective
   ],
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
   entryComponents: [

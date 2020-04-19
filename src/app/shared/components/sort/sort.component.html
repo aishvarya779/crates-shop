@@ -15,7 +15,11 @@
     <label for="discount">Discount</label>
   </div>
 </div>
-<button (click)="open()">Open Modal</button>
 <!-- <crs-dialog id="sort">
   <h1>This is The Modal</h1>
 </crs-dialog> -->
+<button (click)="showDialog('modal_1')" *ngIf="(screenSize$ |async)">Open Sort</button>
+<crs-dialog id="modal_1" class="hhidden">
+  Sort Dialog
+  <button (click)="close('modal_1')">Close Dialog</button>
+</crs-dialog>
