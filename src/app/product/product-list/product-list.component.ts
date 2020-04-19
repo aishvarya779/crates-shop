@@ -21,9 +21,13 @@ export class ProductListComponent implements OnInit {
         id: 1 + i,
         sellingPrice: 32 + i * 14,
         count: 0,
-        discount: 24 + i * 0.6,
+        discount: +(24 + i * 2).toFixed(0),
         img: 'assets/tata_salt.jpeg'
       };
+      item.discountPrice = +(
+        item.sellingPrice *
+        (1 - item.discount / 100)
+      ).toFixed(0);
       this.list.push(item);
     }
     this.screenSize$ = this.resizeSvc.onResize$;

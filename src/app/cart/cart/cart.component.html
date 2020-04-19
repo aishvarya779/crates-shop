@@ -11,8 +11,8 @@
               <div class="col-md-4 m-auto">
                 <h5 class="card-title">{{item.name}}</h5>
                 <p class="card-text">
-                  <span class="font-weight-bold">&#8377;{{item.sellingPrice}}</span>
-                  <span class="mx-3 text-muted line-through"></span>
+                  <span class="font-weight-bold">&#8377;{{item.discountPrice}}</span>
+                  <span class="mx-3 text-muted line-through">{{item.sellingPrice}}</span>
                   <span class="text-success">{{item.discount}}% Off</span>
                 </p>
               </div>
@@ -38,7 +38,7 @@
       </div>
       <div class="card-body">
         <div class="card-text d-flex">
-          <p class="col">Price &#x28;1 Item&#x29;</p>
+          <p class="col">Price &#x28;{{totalCount}} Item&#x29;</p>
           <p class="col d-flex justify-content-between"><span>:</span><span>&#8377;{{totalPrice}}</span></p>
         </div>
         <div class="card-text d-flex">

@@ -14,6 +14,7 @@ export class CartComponent implements OnInit, OnDestroy {
   subcription: Subject<any> = new Subject();
   totalPrice: number = 0;
   totalDiscount: number = 0;
+  totalCount: number = 0;
   constructor(private cartSvc: CartService) {}
 
   ngOnInit(): void {
@@ -21,12 +22,15 @@ export class CartComponent implements OnInit, OnDestroy {
       .getCartItem()
       .pipe(takeUntil(this.subcription));
     this.cartItems$.subscribe((data: PRODUCT[]) => {
+      this.totalPrice = 0;
+      this.totalDiscount = 0;
+      this.totalCount = 0;
       data.forEach(item => {
-        this.totalPrice += +item.sellingPrice.toFixed(0);
-        this.totalDiscount += +(
-          item.sellingPrice *
-          (1 - item.discount / 100)
-        ).toFixed(0);
+        this.totalPrice += +item.sellingPrice.toFixed(0) * item.count;
+        this.totalDiscount +=
+          (+item.sellingPrice.toFixed(0) - +item.discountPrice.toFixed(0)) *
+          item.count;
+        this.totalCount += item.count;
       });
     });
   }

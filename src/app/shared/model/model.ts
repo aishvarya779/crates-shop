@@ -5,6 +5,7 @@ export interface PRODUCT {
   discount: number;
   img: string;
   count: number;
+  discountPrice?: number;
 }
 
 export interface ADDEDPRODUCT {
