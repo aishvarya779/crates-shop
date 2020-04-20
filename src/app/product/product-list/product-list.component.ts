@@ -10,6 +10,7 @@ import { CartService } from 'src/app/shared/services/cart.service';
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
+  order: string = 'asc';
   screenSize$: Observable<boolean>;
   list: PRODUCT[] = [];
   constructor(private resizeSvc: ResizeService, private cartSvc: CartService) {}

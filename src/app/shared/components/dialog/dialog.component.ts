@@ -13,7 +13,9 @@ export class DialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.el.nativeElement.addEventListener('click', () => {
-      this.close();
+      if (this.el.nativeElement.tagName.toLowerCase() !== 'crs-dialog') {
+        this.close();
+      }
     });
   }
   // ngOnDestroy(): void {

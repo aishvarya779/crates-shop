@@ -11,7 +11,7 @@ import { RangeSliderComponent } from './components/range-slider/range-slider.com
 import { RangeSliderThumbComponent } from './components/range-slider-thumb/range-slider-thumb.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { SortPipeDirective } from './pipes/sort-pipe.directive';
+import { SortPipe } from './pipes/sort-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -24,12 +24,9 @@ import { SortPipeDirective } from './pipes/sort-pipe.directive';
     DialogComponent,
     RangeSliderComponent,
     RangeSliderThumbComponent,
-    SortPipeDirective
+    SortPipe
   ],
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
-  entryComponents: [
-    // DialogComponent
-  ],
   exports: [
     SearchComponent,
     CartIconComponent,
@@ -38,7 +35,8 @@ import { SortPipeDirective } from './pipes/sort-pipe.directive';
     FooterComponent,
     SortComponent,
     DialogComponent,
-    RangeSliderComponent
+    RangeSliderComponent,
+    SortPipe
   ]
 })
 export class SharedModule {}

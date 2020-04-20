@@ -3,23 +3,34 @@
     <span class="h5">Sort By</span>
   </div>
   <div class="col-3 px-0">
-    <input type="radio" id="low" name="sort-group">
+    <input type="radio" id="low" name="sort-group" value="asc" (click)="emitSort('asc')">
     <label for="low">Price == Low High</label>
   </div>
   <div class="col-3 px-0">
-    <input type="radio" id="high" name="sort-group">
+    <input type="radio" id="high" name="sort-group" value="desc" (click)="emitSort('desc')">
     <label for="high">Price == High Low</label>
   </div>
   <div class="col-2 px-0">
-    <input type="radio" id="discount" name="sort-group">
+    <input type="radio" id="discount" name="sort-group" value="disc" (click)="emitSort('disc')">
     <label for="discount">Discount</label>
   </div>
 </div>
+
 <!-- <crs-dialog id="sort">
   <h1>This is The Modal</h1>
 </crs-dialog> -->
 <button (click)="showDialog('modal_1')" *ngIf="(screenSize$ |async)">Open Sort</button>
 <crs-dialog id="modal_1" class="hhidden">
-  Sort Dialog
+  <div class="row">
+    <div class="col">
+      <h5 class="title">Sort Options</h5>
+      <input type="radio" id="low" name="sort-group" value="asc" (click)="emitSort('asc')">
+      <label for="low">Price == Low High</label><br>
+      <input type="radio" id="high" name="sort-group" value="desc" (click)="emitSort('desc')">
+      <label for="high">Price == High Low </label><br>
+      <input type="radio" id="discount" name="sort-group" value="disc" (click)="emitSort('disc')">
+      <label for="discount">Discount</label>
+    </div>
+  </div>
   <button (click)="close('modal_1')">Close Dialog</button>
 </crs-dialog>

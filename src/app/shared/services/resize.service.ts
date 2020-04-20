@@ -24,7 +24,6 @@ export class ResizeService {
   }
   detectScreenSize() {
     let cwidth = window.innerWidth;
-    console.log(cwidth);
     if (cwidth < 768) {
       this.onResize(true);
     } else {

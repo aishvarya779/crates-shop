@@ -21,7 +21,8 @@
         </div>
         <div class="row mx-0">
           <div class="card mx-1 my-1 border col-5 offset-1 col-md-2 col-lg-2 col-xl-2 offset-md-1 offset-lg-1
-            offset-xl-1" *ngFor="let item of list">
+            offset-xl-1" *ngFor="let item of list | sort: order">
+            {{order}}
             <img [src]="item.img" class="card-img-top" alt="...">
             <div class="card-body">
 
@@ -44,5 +45,5 @@
   </div>
 </div>
 <ng-template #sort>
-  <crs-sort></crs-sort>
+  <crs-sort (sortOrder)="order = $event"></crs-sort>
 </ng-template>

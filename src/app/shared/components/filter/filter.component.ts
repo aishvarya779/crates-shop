@@ -26,25 +26,13 @@ export class FilterComponent
   ) {}
 
   ngOnInit(): void {
-    // this.screenSize$ = this.resizeSvc.onResize$;
-    // this.screenSize$.subscribe(val => {
-    //   console.log(val);
-    // });
     this.rangeSlider = new FormControl([100, 500]);
     this.screenSize$ = this.resizeSvc.onResize$;
-    // this.rangeSlider.valueChanges.subscribe(val => {});
   }
   ngAfterContentInit() {}
-  ngAfterViewInit() {
-    console.log(this.screenSize$);
-    this.screenSize$.subscribe(val => {
-      console.log(val);
-    });
-  }
+  ngAfterViewInit() {}
   ngAfterViewChecked(): void {
     this.resizeSvc.detectScreenSize();
-    //Called after every check of the component's view. Applies to components only.
-    //Add 'implements AfterViewChecked' to the class.
   }
   showDialog(id) {
     this.dialogSvc.showDialog(id);

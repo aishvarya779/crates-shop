@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ResizeService } from '../../services/resize.service';
 import { Observable } from 'rxjs';
 import { DialogService } from '../../services/dialog.service';
@@ -9,6 +9,7 @@ import { DialogService } from '../../services/dialog.service';
   styleUrls: ['./sort.component.scss']
 })
 export class SortComponent implements OnInit {
+  @Output() sortOrder: EventEmitter<string> = new EventEmitter();
   screenSize$: Observable<boolean>;
   constructor(
     private resizeSvc: ResizeService,
@@ -25,5 +26,9 @@ export class SortComponent implements OnInit {
   }
   close(id) {
     this.dialogSvc.closeDialog(id);
+  }
+
+  emitSort(type) {
+    this.sortOrder.emit(type);
   }
 }
