@@ -23,7 +23,13 @@
 <crs-dialog id="modal_1" class="hhidden">
   <div class="row">
     <div class="col">
-      <h5 class="title">Sort Options</h5>
+      <div class="d-flex justify-content-between">
+        <h5 class="title">Sort Options</h5>
+        <button type="button" class="close" (click)="close('modal_1')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- <h5 class="title"></h5> -->
       <input type="radio" id="low" name="sort-group" value="asc" (click)="emitSort('asc')">
       <label for="low">Price == Low High</label><br>
       <input type="radio" id="high" name="sort-group" value="desc" (click)="emitSort('desc')">
@@ -32,5 +38,5 @@
       <label for="discount">Discount</label>
     </div>
   </div>
-  <button (click)="close('modal_1')">Close Dialog</button>
+  <!-- <button (click)="close('modal_1')">Close Dialog</button> -->
 </crs-dialog>
